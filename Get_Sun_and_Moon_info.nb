@@ -1,0 +1,424 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15858,        415]
+NotebookOptionsPosition[     15162,        387]
+NotebookOutlinePosition[     15539,        403]
+CellTagsIndexPosition[     15496,        400]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "startingDirectory", "=", 
+   "\"\<C:\\Users\\Tom\\OneDrive\\ASU_Thesis\\Beams\\EDGES\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetDirectory", "[", "startingDirectory", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Starting Directory is \>\"", ",", " ", "startingDirectory"}], 
+   "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dataset", "=", "\"\<high_band\\v1\>\""}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"dataset", "=", "\"\<low_band\\v1\>\""}], ";"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"antennaType", "=", "\"\<Blade\>\""}], "  ", ";", "  ", 
+   RowBox[{"variation", "=", "\"\<2015\>\""}], " ", ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"binned", "=", "\"\<True\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"binned", "\[Equal]", "\"\<True\>\""}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"frequencySteps", "=", "250"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"bw", "=", "\"\<400kHz\>\""}], ";"}], "\[IndentingNewLine]", 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"frequencySteps", "=", "16385"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"bw", "=", "\"\<6kHz\>\""}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"filenamedata", "=", "\"\<frequency_steps.txt\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"filenametime", "=", "\"\<LST_steps.txt\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"siderialtime", "=", 
+    RowBox[{"Import", "[", 
+     RowBox[{"filenametime", ",", "\"\<Table\>\""}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Antenna Type = \>\"", ",", "antennaType"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Variation = \>\"", ",", "variation"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"workingDirectory", "=", 
+   RowBox[{"dataset", "  ", "<>", " ", "\"\</\>\""}]}], " ", 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetDirectory", "[", "workingDirectory", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Working Directory is \>\"", ",", " ", "workingDirectory"}], 
+    "]"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"binned", " ", "\[Equal]", " ", "\"\<True\>\""}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"files", "=", 
+       RowBox[{"FileNames", "[", "\"\<*LST_binned_data_v1.txt\>\"", "]"}]}], 
+      ";"}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"files", "=", 
+       RowBox[{"FileNames", "[", "\"\<*LST_data_v1.txt\>\"", "]"}]}], ";"}]}],
+     "\[IndentingNewLine]", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"metafiles", "=", 
+   RowBox[{"FileNames", "[", "\"\<*meta_v1.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"suninfo", "=", 
+   RowBox[{"ConstantArray", "[", 
+    RowBox[{"0", ",", 
+     RowBox[{"{", 
+      RowBox[{"72", ",", 
+       RowBox[{
+        RowBox[{"Length", "[", "metafiles", "]"}], " ", "+", "1"}]}], "}"}]}],
+     "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"mooninfo", "=", 
+    RowBox[{"ConstantArray", "[", 
+     RowBox[{"0", ",", 
+      RowBox[{"{", 
+       RowBox[{"72", ",", 
+        RowBox[{
+         RowBox[{"Length", "[", "metafiles", "]"}], " ", "+", "1"}]}], 
+       "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Extract", " ", "the", " ", "metafile", " ", "information"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Do", "[", " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "get", " ", "the", " ", "meta", " ", "data", " ", "regarding", " ", "sun",
+      " ", "position", " ", "and", " ", "LST"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"meta", "=", 
+      RowBox[{"Import", "[", 
+       RowBox[{
+        RowBox[{"metafiles", "[", 
+         RowBox[{"[", "metafileIndex", "]"}], "]"}], ",", "\"\<Table\>\""}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"suninfo", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"1", ";;"}], ",", "1"}], "]"}], "]"}], "=", 
+      RowBox[{"meta", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"1", ";;"}], ",", "1"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"suninfo", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"1", ";;"}], ",", 
+         RowBox[{"1", "+", "metafileIndex"}]}], "]"}], "]"}], "=", 
+      RowBox[{"meta", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"1", ";;"}], ",", "4"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"mooninfo", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"1", ";;"}], ",", "1"}], "]"}], "]"}], "=", 
+      RowBox[{"meta", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"1", ";;"}], ",", "1"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"mooninfo", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"1", ";;"}], ",", 
+         RowBox[{"1", "+", "metafileIndex"}]}], "]"}], "]"}], "=", 
+      RowBox[{"meta", "[", 
+       RowBox[{"[", 
+        RowBox[{
+         RowBox[{"1", ";;"}], ",", "6"}], "]"}], "]"}]}], ";"}], 
+    "\[IndentingNewLine]", ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"metafileIndex", ",", "1", ",", 
+      RowBox[{"Length", "[", "metafiles", "]"}], ",", "1"}], "}"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", " ", 
+   RowBox[{
+    RowBox[{"antennaType", " ", "<>", " ", "\"\<_sun_vs_lst.mat\>\""}], ",", 
+    "suninfo"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", " ", 
+   RowBox[{
+    RowBox[{"antennaType", " ", "<>", " ", "\"\<_moon_vs_lst.mat\>\""}], ",", 
+    "mooninfo"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<We are working with \>\"", ",", " ", 
+    RowBox[{"Length", "[", "files", "]"}], ",", "\"\< files\>\""}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<We are working with \>\"", ",", " ", 
+    RowBox[{"Length", "[", "metafiles", "]"}], ",", "\"\< meta files\>\""}], 
+   "]"}], ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6548214877450876`*^9, 3.654821524027443*^9}, 
+   3.6548226374028373`*^9, 3.654822913393091*^9, 3.6548232634174433`*^9, 
+   3.6548234409452686`*^9, {3.654823544945114*^9, 3.6548235460963984`*^9}, {
+   3.6548324386708612`*^9, 3.6548325119737787`*^9}, {3.6570715140014133`*^9, 
+   3.657071546697872*^9}, {3.6571272854650035`*^9, 3.657127311728799*^9}, 
+   3.657127342592783*^9, {3.65728692154634*^9, 3.657286962138855*^9}},
+ EmphasizeSyntaxErrors->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Starting Directory is \"\>", 
+   "\[InvisibleSpace]", \
+"\<\"C:\\\\Users\\\\Tom\\\\OneDrive\\\\ASU_Thesis\\\\Beams\\\\EDGES\"\>"}],
+  SequenceForm[
+  "Starting Directory is ", 
+   "C:\\Users\\Tom\\OneDrive\\ASU_Thesis\\Beams\\EDGES"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.654821207478747*^9, 3.6548214569231367`*^9, 3.654821590233531*^9, 
+   3.6548226507573013`*^9, 3.6548229201528378`*^9, 3.654823266908349*^9, 
+   3.6548234463046565`*^9, 3.65482354762481*^9, {3.6548324978771286`*^9, 
+   3.654832518106365*^9}, 3.6571273558372097`*^9, 3.657286985026764*^9, 
+   3.6572886048227363`*^9, 3.657291291473506*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Antenna Type = \"\>", "\[InvisibleSpace]", "\<\"Blade\"\>"}],
+  SequenceForm["Antenna Type = ", "Blade"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.654821207478747*^9, 3.6548214569231367`*^9, 3.654821590233531*^9, 
+   3.6548226507573013`*^9, 3.6548229201528378`*^9, 3.654823266908349*^9, 
+   3.6548234463046565`*^9, 3.65482354762481*^9, {3.6548324978771286`*^9, 
+   3.654832518106365*^9}, 3.6571273558372097`*^9, 3.657286985026764*^9, 
+   3.6572886048227363`*^9, 3.6572912915335217`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Variation = \"\>", "\[InvisibleSpace]", "\<\"2015\"\>"}],
+  SequenceForm["Variation = ", "2015"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.654821207478747*^9, 3.6548214569231367`*^9, 3.654821590233531*^9, 
+   3.6548226507573013`*^9, 3.6548229201528378`*^9, 3.654823266908349*^9, 
+   3.6548234463046565`*^9, 3.65482354762481*^9, {3.6548324978771286`*^9, 
+   3.654832518106365*^9}, 3.6571273558372097`*^9, 3.657286985026764*^9, 
+   3.6572886048227363`*^9, 3.6572912915355277`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Working Directory is \"\>", 
+   "\[InvisibleSpace]", "\<\"high_band\\\\v1/\"\>"}],
+  SequenceForm["Working Directory is ", "high_band\\v1/"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.654821207478747*^9, 3.6548214569231367`*^9, 3.654821590233531*^9, 
+   3.6548226507573013`*^9, 3.6548229201528378`*^9, 3.654823266908349*^9, 
+   3.6548234463046565`*^9, 3.65482354762481*^9, {3.6548324978771286`*^9, 
+   3.654832518106365*^9}, 3.6571273558372097`*^9, 3.657286985026764*^9, 
+   3.6572886048227363`*^9, 3.6572912915375214`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"We are working with \"\>", "\[InvisibleSpace]", "83", 
+   "\[InvisibleSpace]", "\<\" files\"\>"}],
+  SequenceForm["We are working with ", 83, " files"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.654821207478747*^9, 3.6548214569231367`*^9, 3.654821590233531*^9, 
+   3.6548226507573013`*^9, 3.6548229201528378`*^9, 3.654823266908349*^9, 
+   3.6548234463046565`*^9, 3.65482354762481*^9, {3.6548324978771286`*^9, 
+   3.654832518106365*^9}, 3.6571273558372097`*^9, 3.657286985026764*^9, 
+   3.6572886048227363`*^9, 3.657291293558045*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"We are working with \"\>", "\[InvisibleSpace]", "83", 
+   "\[InvisibleSpace]", "\<\" meta files\"\>"}],
+  SequenceForm["We are working with ", 83, " meta files"],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.654821207478747*^9, 3.6548214569231367`*^9, 3.654821590233531*^9, 
+   3.6548226507573013`*^9, 3.6548229201528378`*^9, 3.654823266908349*^9, 
+   3.6548234463046565`*^9, 3.65482354762481*^9, {3.6548324978771286`*^9, 
+   3.654832518106365*^9}, 3.6571273558372097`*^9, 3.657286985026764*^9, 
+   3.6572886048227363`*^9, 3.6572912935610533`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"suninfo", "[", 
+    RowBox[{"[", 
+     RowBox[{
+      RowBox[{"1", ";;"}], ",", "82"}], "]"}], "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.654821234895819*^9, 3.654821237128396*^9}, {
+  3.65482159754443*^9, 3.6548217198640046`*^9}, {3.654821771089232*^9, 
+  3.6548218703128357`*^9}, {3.6548219013118453`*^9, 3.654821938232377*^9}, {
+  3.65482201792093*^9, 3.654822070185421*^9}, {3.65482266816778*^9, 
+  3.654822766298109*^9}, {3.6548232801537533`*^9, 3.6548232803387985`*^9}, {
+  3.6548233108406725`*^9, 3.6548233115868645`*^9}, {3.654823374864211*^9, 
+  3.6548233753863335`*^9}, {3.654823460146222*^9, 3.654823481695775*^9}, {
+  3.654823567567953*^9, 3.6548235829039*^9}, {3.657291320347983*^9, 
+  3.657291320795107*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "26.96702417`"}], ",", 
+   RowBox[{"-", "30.25768173`"}], ",", 
+   RowBox[{"-", "33.32821616`"}], ",", 
+   RowBox[{"-", "36.18222234`"}], ",", 
+   RowBox[{"-", "38.73016443`"}], ",", 
+   RowBox[{"-", "40.90012567`"}], ",", 
+   RowBox[{"-", "42.68524491`"}], ",", 
+   RowBox[{"-", "44.03945412`"}], ",", 
+   RowBox[{"-", "44.91072929`"}], ",", 
+   RowBox[{"-", "45.28017433`"}], ",", 
+   RowBox[{"-", "45.12453752`"}], ",", 
+   RowBox[{"-", "44.45512473`"}], ",", 
+   RowBox[{"-", "43.26930367`"}], ",", 
+   RowBox[{"-", "41.64493511`"}], ",", 
+   RowBox[{"-", "39.60786914`"}], ",", 
+   RowBox[{"-", "37.20955182`"}], ",", 
+   RowBox[{"-", "34.49580637`"}], ",", 
+   RowBox[{"-", "31.45890032`"}], ",", 
+   RowBox[{"-", "28.23832898`"}], ",", 
+   RowBox[{"-", "24.83205132`"}], ",", 
+   RowBox[{"-", "21.25314568`"}], ",", 
+   RowBox[{"-", "17.52724554`"}], ",", 
+   RowBox[{"-", "13.66952102`"}], ",", 
+   RowBox[{"-", "9.71864127`"}], ",", 
+   RowBox[{"-", "5.04972205`"}], ",", 
+   RowBox[{"-", "0.70746482`"}], ",", "2.91703408`", ",", "7.01778746`", ",", 
+   "11.25003759`", ",", "15.59977101`", ",", "19.94119215`", ",", 
+   "24.30967317`", ",", "28.70651878`", ",", "33.51636888`", ",", 
+   "38.39152856`", ",", "42.88784401`", ",", "47.30177368`", ",", 
+   "51.69115381`", ",", "56.12412972`", ",", "60.52917698`", ",", 
+   "64.8933208`", ",", "69.14335222`", ",", "73.20342072`", ",", 
+   "76.88332472`", ",", "79.73924793`", ",", "81.043127`", ",", "80.1720019`",
+    ",", "77.51131452`", ",", "73.98051825`", ",", "70.03886836`", ",", 
+   "65.79893238`", ",", "61.43851998`", ",", "57.07716168`", ",", 
+   "52.67307451`", ",", "48.2385339`", ",", "43.80601994`", ",", 
+   "39.3130453`", ",", "34.89615033`", ",", "30.48924563`", ",", 
+   "26.01193758`", ",", "21.63190655`", ",", "17.2851053`", ",", 
+   "12.96891841`", ",", "8.7063727`", ",", "4.53468945`", ",", "0.64896966`", 
+   ",", 
+   RowBox[{"-", "3.08008704`"}], ",", 
+   RowBox[{"-", "8.08437515`"}], ",", 
+   RowBox[{"-", "12.08414693`"}], ",", 
+   RowBox[{"-", "15.97362681`"}], ",", 
+   RowBox[{"-", "19.74958494`"}], ",", 
+   RowBox[{"-", "23.43679298`"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.6548212380566244`*^9, {3.6548216017035084`*^9, 3.654821613550562*^9}, {
+   3.6548216453507643`*^9, 3.654821720711228*^9}, 3.6548218011029797`*^9, 
+   3.6548218789270506`*^9, 3.6548219092168856`*^9, 3.654821939558702*^9, 
+   3.6548220259420176`*^9, {3.6548226739042716`*^9, 3.6548227670183125`*^9}, {
+   3.654823288418885*^9, 3.65482331312928*^9}, 3.6548233767417*^9, {
+   3.65482345090584*^9, 3.654823482373967*^9}, {3.6548235544055557`*^9, 
+   3.6548235834680576`*^9}, {3.657291316150902*^9, 3.6572913216703296`*^9}}]
+}, Open  ]]
+},
+WindowSize->{994, 1344},
+WindowMargins->{{Automatic, 709}, {35, Automatic}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (October 9, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 7337, 202, 1141, "Input"],
+Cell[CellGroupData[{
+Cell[7942, 228, 675, 14, 27, "Print"],
+Cell[8620, 244, 548, 10, 27, "Print"],
+Cell[9171, 256, 540, 10, 27, "Print"],
+Cell[9714, 268, 584, 11, 27, "Print"],
+Cell[10301, 281, 593, 11, 27, "Print"],
+Cell[10897, 294, 605, 11, 27, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11551, 311, 842, 16, 106, "Input"],
+Cell[12396, 329, 2750, 55, 323, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
